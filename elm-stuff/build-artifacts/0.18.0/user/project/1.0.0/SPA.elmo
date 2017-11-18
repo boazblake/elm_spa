@@ -1,0 +1,188 @@
+var _user$project$SPA$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$SPA$render_page = function (model) {
+	var page_content = function () {
+		var _p0 = model.currentPage;
+		switch (_p0.ctor) {
+			case 'Home':
+				return _elm_lang$html$Html$text('Home');
+			case 'Login':
+				return _elm_lang$html$Html$text('Login');
+			default:
+				return _elm_lang$html$Html$text('About');
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: page_content,
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$SPA$Model = function (a) {
+	return {currentPage: a};
+};
+var _user$project$SPA$About = {ctor: 'About'};
+var _user$project$SPA$Login = {ctor: 'Login'};
+var _user$project$SPA$Home = {ctor: 'Home'};
+var _user$project$SPA$init = function (location) {
+	var page = function () {
+		var _p1 = location.hash;
+		switch (_p1) {
+			case '#home':
+				return _user$project$SPA$Home;
+			case '#login':
+				return _user$project$SPA$Login;
+			case '#about':
+				return _user$project$SPA$About;
+			default:
+				return _user$project$SPA$Home;
+		}
+	}();
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$SPA$Model(page),
+		_1: _elm_lang$core$Platform_Cmd$none
+	};
+};
+var _user$project$SPA$update = F2(
+	function (msg, model) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'GoHome':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{currentPage: _user$project$SPA$Home}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'GoLogin':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{currentPage: _user$project$SPA$Login}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'GoAbout':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{currentPage: _user$project$SPA$About}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _elm_lang$navigation$Navigation$newUrl(_p2._0)
+				};
+		}
+	});
+var _user$project$SPA$LinkTo = function (a) {
+	return {ctor: 'LinkTo', _0: a};
+};
+var _user$project$SPA$render_menu = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$SPA$LinkTo('#home')),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Home'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$SPA$LinkTo('#login')),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Login'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$SPA$LinkTo('#about')),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('About'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$SPA$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('SPA application'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$SPA$render_menu(model),
+				_1: {
+					ctor: '::',
+					_0: _user$project$SPA$render_page(model),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$SPA$GoAbout = {ctor: 'GoAbout'};
+var _user$project$SPA$GoLogin = {ctor: 'GoLogin'};
+var _user$project$SPA$GoHome = {ctor: 'GoHome'};
+var _user$project$SPA$locFor = function (location) {
+	var _p3 = location.hash;
+	switch (_p3) {
+		case '#home':
+			return _user$project$SPA$GoHome;
+		case '#login':
+			return _user$project$SPA$GoLogin;
+		case '#about':
+			return _user$project$SPA$GoAbout;
+		default:
+			return _user$project$SPA$GoHome;
+	}
+};
+var _user$project$SPA$main = A2(
+	_elm_lang$navigation$Navigation$program,
+	_user$project$SPA$locFor,
+	{init: _user$project$SPA$init, update: _user$project$SPA$update, view: _user$project$SPA$view, subscriptions: _user$project$SPA$subscriptions})();

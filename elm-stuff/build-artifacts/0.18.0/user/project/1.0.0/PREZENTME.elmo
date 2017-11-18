@@ -1,0 +1,202 @@
+var _user$project$PREZENTME$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$PREZENTME$render_page = function (model) {
+	var page_content = function () {
+		var _p0 = model.currentPage;
+		switch (_p0.ctor) {
+			case 'Home':
+				return _elm_lang$html$Html$text('Home');
+			case 'Login':
+				return _elm_lang$html$Html$text('Login');
+			default:
+				return _elm_lang$html$Html$text('About');
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: page_content,
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$PREZENTME$Model = function (a) {
+	return {currentPage: a};
+};
+var _user$project$PREZENTME$About = {ctor: 'About'};
+var _user$project$PREZENTME$Login = {ctor: 'Login'};
+var _user$project$PREZENTME$Home = {ctor: 'Home'};
+var _user$project$PREZENTME$route = _evancz$url_parser$UrlParser$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_evancz$url_parser$UrlParser$map,
+			_user$project$PREZENTME$Home,
+			_evancz$url_parser$UrlParser$s('Home')),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_evancz$url_parser$UrlParser$map,
+				_user$project$PREZENTME$Login,
+				_evancz$url_parser$UrlParser$s('Login')),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_evancz$url_parser$UrlParser$map,
+					_user$project$PREZENTME$About,
+					_evancz$url_parser$UrlParser$s('About')),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$PREZENTME$init = function (location) {
+	var page = function () {
+		var _p1 = A2(_evancz$url_parser$UrlParser$parseHash, _user$project$PREZENTME$route, location);
+		if (_p1.ctor === 'Nothing') {
+			return _user$project$PREZENTME$Home;
+		} else {
+			return _p1._0;
+		}
+	}();
+	return {
+		ctor: '_Tuple2',
+		_0: _user$project$PREZENTME$Model(page),
+		_1: _elm_lang$core$Platform_Cmd$none
+	};
+};
+var _user$project$PREZENTME$update = F2(
+	function (msg, model) {
+		var _p2 = msg;
+		if (_p2.ctor === 'GoTo') {
+			var _p3 = _p2._0;
+			if (_p3.ctor === 'Nothing') {
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{currentPage: _user$project$PREZENTME$Home}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{currentPage: _p3._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			}
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: model,
+				_1: _elm_lang$navigation$Navigation$newUrl(_p2._0)
+			};
+		}
+	});
+var _user$project$PREZENTME$LinkTo = function (a) {
+	return {ctor: 'LinkTo', _0: a};
+};
+var _user$project$PREZENTME$render_menu = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$PREZENTME$LinkTo('#home')),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Home'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$button,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$PREZENTME$LinkTo('#login')),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Login'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$PREZENTME$LinkTo('#about')),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('About'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$PREZENTME$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h1,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('PREZENT ME'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h2,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Built With Elm'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$PREZENTME$render_menu(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$PREZENTME$render_page(model),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$PREZENTME$GoTo = function (a) {
+	return {ctor: 'GoTo', _0: a};
+};
+var _user$project$PREZENTME$locFor = function (location) {
+	return _user$project$PREZENTME$GoTo(
+		A2(_evancz$url_parser$UrlParser$parseHash, _user$project$PREZENTME$route, location));
+};
+var _user$project$PREZENTME$main = A2(
+	_elm_lang$navigation$Navigation$program,
+	_user$project$PREZENTME$locFor,
+	{init: _user$project$PREZENTME$init, update: _user$project$PREZENTME$update, view: _user$project$PREZENTME$view, subscriptions: _user$project$PREZENTME$subscriptions})();
