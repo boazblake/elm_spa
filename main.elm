@@ -22,16 +22,16 @@ locFor : Location -> Msg
 locFor location =
     case location.hash of
         "#home" ->
-            GoHome
+            GoTo Home
 
         "#login" ->
-            GoLogin
+            GoTo Login
 
         "#about" ->
-            GoAbout
+            GoTo About
 
         _ ->
-            GoHome
+            GoTo Home
 
 
 
@@ -74,23 +74,15 @@ init location =
 
 
 type Msg
-    = GoHome
-    | GoLogin
-    | GoAbout
+    = GoTo Page
     | LinkTo String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        GoHome ->
-            ( { model | currentPage = Home }, Cmd.none )
-
-        GoLogin ->
-            ( { model | currentPage = Login }, Cmd.none )
-
-        GoAbout ->
-            ( { model | currentPage = About }, Cmd.none )
+        GoTo page ->
+            ( { model | currentPage = page }, Cmd.none )
 
         LinkTo path ->
             ( model, newUrl path )

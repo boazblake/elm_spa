@@ -22,6 +22,25 @@ var _user$project$SPA$render_page = function (model) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$SPA$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		if (_p1.ctor === 'GoTo') {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{currentPage: _p1._0}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: model,
+				_1: _elm_lang$navigation$Navigation$newUrl(_p1._0)
+			};
+		}
+	});
 var _user$project$SPA$Model = function (a) {
 	return {currentPage: a};
 };
@@ -30,8 +49,8 @@ var _user$project$SPA$Login = {ctor: 'Login'};
 var _user$project$SPA$Home = {ctor: 'Home'};
 var _user$project$SPA$init = function (location) {
 	var page = function () {
-		var _p1 = location.hash;
-		switch (_p1) {
+		var _p2 = location.hash;
+		switch (_p2) {
 			case '#home':
 				return _user$project$SPA$Home;
 			case '#login':
@@ -48,42 +67,6 @@ var _user$project$SPA$init = function (location) {
 		_1: _elm_lang$core$Platform_Cmd$none
 	};
 };
-var _user$project$SPA$update = F2(
-	function (msg, model) {
-		var _p2 = msg;
-		switch (_p2.ctor) {
-			case 'GoHome':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{currentPage: _user$project$SPA$Home}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'GoLogin':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{currentPage: _user$project$SPA$Login}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'GoAbout':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{currentPage: _user$project$SPA$About}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _elm_lang$navigation$Navigation$newUrl(_p2._0)
-				};
-		}
-	});
 var _user$project$SPA$LinkTo = function (a) {
 	return {ctor: 'LinkTo', _0: a};
 };
@@ -166,20 +149,20 @@ var _user$project$SPA$view = function (model) {
 			}
 		});
 };
-var _user$project$SPA$GoAbout = {ctor: 'GoAbout'};
-var _user$project$SPA$GoLogin = {ctor: 'GoLogin'};
-var _user$project$SPA$GoHome = {ctor: 'GoHome'};
+var _user$project$SPA$GoTo = function (a) {
+	return {ctor: 'GoTo', _0: a};
+};
 var _user$project$SPA$locFor = function (location) {
 	var _p3 = location.hash;
 	switch (_p3) {
 		case '#home':
-			return _user$project$SPA$GoHome;
+			return _user$project$SPA$GoTo(_user$project$SPA$Home);
 		case '#login':
-			return _user$project$SPA$GoLogin;
+			return _user$project$SPA$GoTo(_user$project$SPA$Login);
 		case '#about':
-			return _user$project$SPA$GoAbout;
+			return _user$project$SPA$GoTo(_user$project$SPA$About);
 		default:
-			return _user$project$SPA$GoHome;
+			return _user$project$SPA$GoTo(_user$project$SPA$Home);
 	}
 };
 var _user$project$SPA$main = A2(
